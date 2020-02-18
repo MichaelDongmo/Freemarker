@@ -1,0 +1,25 @@
+Assicurarsi di avere ANT 1.8 o superiori ed Ivy 2.3 o superiori
+Mettere nella dir lib di ant il jar di Ivy
+
+
+Impostare il numero di versione nel file  src/main/resources/freemarker/version.properties
+
+
+Impostare il proxy per Ivy in modo da passare in un tunnel localhost verso il proxy
+
+set ANT_OPTS=-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8000 -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=8000
+
+Assicurarsi che il file build.properties abbia i path corretti per il proprio ambiente.
+
+Lanciare la build del jar:
+
+> ant jar
+
+Se tutto ok, generare il pom:
+
+> ant maven-pom
+
+Se tutto ok, deploy verso Artifactory:
+
+> mvn deploy:deploy-file -Durl=https://toolbox.sia.eu/artifactory/OSV-Release -DrepositoryId=nexus -DpomFile=build/pom.xml -Dfile=build/freemarker.jar
+
